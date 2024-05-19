@@ -14,6 +14,10 @@ except:
                 x = c
         except:
             print("\n")
+def trouveer_la_valeur_respective_apre_regroupement_binaire(a:str,choice:int):
+    valeur_apres_division_apres:str = None
+    #Boucle qui me permet voir la verion decimal des valeur trier par trois ou 4 et le rendre avec return
+
 def regroupement_des_valeur_selon_le_choix_de_l_utilisateur(choice,d):
     value_separated:str = None
     print(f"choice :  { choice }")
@@ -33,16 +37,31 @@ def regroupement_des_valeur_selon_le_choix_de_l_utilisateur(choice,d):
     print(int(len(value_separated)/int(math.ceil(math.sqrt(choice)))))
     value_after_loop_in_binary_before_final_result = None
     z = len(value_separated) - 1
+    print(f"len(value_separated) : {len(value_separated)}")
     for i in range(0,int(len(value_separated)/int(math.ceil(math.sqrt(choice))))):
         for x in range(z, int(z - int(math.ceil(math.sqrt(choice)))) , -1):
-            print(f"value_separated[i] : {value_separated[x]}")
-            if value_after_loop_in_binary_before_final_result == None:
-                value_after_loop_in_binary_before_final_result = value_separated[x]
-            else:
-                value_after_loop_in_binary_before_final_result = str(value_separated[x]) + str(value_after_loop_in_binary_before_final_result)
-            z = z - int(math.ceil(math.sqrt(choice)))
+            try:
+                # print(f"value_separated[i] : {value_separated[x]}")
+                if value_after_loop_in_binary_before_final_result == None:
+                    value_after_loop_in_binary_before_final_result = value_separated[x]
+                else:
+                    value_after_loop_in_binary_before_final_result = value_separated[x] + value_after_loop_in_binary_before_final_result
+                    z = z - int(math.ceil(math.sqrt(choice)))
+            except IndexError:
+                value_after_loop_in_binary_before_final_result = "0" + value_after_loop_in_binary_before_final_result
+                break
         value_after_loop_in_binary_before_final_result = " " + value_after_loop_in_binary_before_final_result
-    print(value_after_loop_in_binary_before_final_result)        
+    print(value_after_loop_in_binary_before_final_result)
+    print(f"len(value_after_loop_in_binary_before_final_result.split( )) : {len(value_after_loop_in_binary_before_final_result.split( ))}")
+    enfin_resultat_final_en_octal_ou_hexadecimal:str = None
+    for a in range(0,len(value_after_loop_in_binary_before_final_result.split( ))):
+        print(f"a : {a}")
+        print(f"int(value_after_loop_in_binary_before_final_result.split( )[a]) : {int(value_after_loop_in_binary_before_final_result.split( )[a])}")
+        if enfin_resultat_final_en_octal_ou_hexadecimal == None:
+            enfin_resultat_final_en_octal_ou_hexadecimal = str(trouveer_la_valeur_respective_apre_regroupement_binaire(value_after_loop_in_binary_before_final_result.split( )[a],int(choice)))
+        else:
+            enfin_resultat_final_en_octal_ou_hexadecimal = enfin_resultat_final_en_octal_ou_hexadecimal + str(trouveer_la_valeur_respective_apre_regroupement_binaire(int(value_after_loop_in_binary_before_final_result.split( )[a]),int(choice)))
+    print(enfin_resultat_final_en_octal_ou_hexadecimal)
 def converter_to_hexa_or_octa(d):
     base_to_convert_out_try:int = None
     try:
